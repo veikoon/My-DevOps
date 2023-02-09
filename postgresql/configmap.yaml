@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  namespace: devops-tools
+  labels:
+    app: postgres
+data:
+  POSTGRESQL_USERNAME: postgresql_user
+  POSTGRESQL_PASSWORD: zbeub2000

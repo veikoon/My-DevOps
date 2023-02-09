@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitlab-deployment
+spec:
+  selector:
+    matchLabels:
+      app: gitlab
+  template:
+    metadata:
+      labels:
+        app: gitlab
+    spec:
+      containers:
+      - name: gitlab
+        image: gitlab/gitlab-ce
+        env:
+          - name: GITLAB_OMNIBUS_CONFIG
+            value: "prometheus['monitor_kubernetes'] = false"
+        ports:
+        - containerPort: 80
+          name: http
+        volumeMounts:
+          - mountPath: /var/opt/gitlab
+            name: data
+      volumes:
+        - name: data
+          emptyDir: {}
